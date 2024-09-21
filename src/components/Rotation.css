@@ -1,0 +1,203 @@
+@import url('https://fonts.cdnfonts.com/css/ica-rubrik-black');
+@import url('https://fonts.cdnfonts.com/css/poppins');
+
+:root {
+    --background-dark: #1b1b1b;
+    --primary-dark: #25283B;
+    --accent-dark: #8a8d93;
+    --text-light: #f0f0f0;
+    --highlight: #4c4f57;
+    --slider-bg: #333;
+    --glow-color-gradient: linear-gradient(45deg, #4a90e2, #e94e77);
+    
+}
+
+body {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    background-color: var(--background-dark);
+    color: var(--text-light);
+}
+
+.banner {
+    width: 100%;
+    height: 100vh;
+    text-align: center;
+    overflow: hidden;
+    position: relative;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    margin: 40px 0;
+}
+
+.banner .slider {
+    position: absolute;
+    width: 200px;
+    height: 250px;
+    top: 10%;
+    left: calc(50% - 100px);
+    transform-style: preserve-3d;
+    transform: perspective(1000px);
+    animation: autoRun 20s linear infinite;
+    z-index: 2;
+    border-radius: 10px;
+}
+
+@keyframes autoRun {
+    from {
+        transform: perspective(1000px) rotateX(-16deg) rotateY(0deg);
+    }
+    to {
+        transform: perspective(1000px) rotateX(-16deg) rotateY(360deg);
+    }
+}
+
+.banner .slider .item {
+    position: absolute;
+    inset: 0 0 0 0;
+    transform: rotateY(calc((var(--position) - 1) * (360deg / var(--quantity)))) translateZ(550px);
+}
+
+.banner .slider .item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 10px;
+    border: 4px solid transparent;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.8);
+    transition: border 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    animation: glowEffect 2s infinite alternate ease-in-out;
+}
+
+@keyframes glowEffect {
+    0% {
+        border-color: #4a90e2;
+        box-shadow: 0 0 20px #4a90e2;
+    }
+    25% {
+        border-color: #8a72ba; 
+        box-shadow: 0 0 25px #8a72ba;
+    }
+    50% {
+        border-color: #e94e77; 
+        box-shadow: 0 0 30px #e94e77;
+    }
+    75% {
+        border-color: #c94e97; 
+        box-shadow: 0 0 25px #c94e97;
+    }
+    100% {
+        border-color: #4a90e2;
+        box-shadow: 0 0 20px #4a90e2;
+    }
+}
+
+
+.banner .content {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: min(1400px, 100vw);
+    height: max-content;
+    padding-bottom: 100px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 1;
+}
+
+.banner .content h1 {
+    font-family: 'ICA Rubrik', sans-serif;
+    font-size: 16em;
+    line-height: 1em;
+    color: var(--primary-dark);
+    position: relative;
+    text-shadow: 2px 2px 8px var(--highlight);
+}
+
+.banner .content h1::after {
+    position: absolute;
+    inset: 0 0 0 0;
+    content: attr(data-content);
+    z-index: 2;
+    -webkit-text-stroke: 2px var(--accent-dark);
+    color: transparent;
+}
+
+.banner .content .author {
+    font-family: 'Poppins', sans-serif;
+    text-align: right;
+    max-width: 200px;
+    color: var(--accent-dark);
+}
+
+.banner .content h2 {
+    font-size: 3em;
+    color: var(--text-light);
+    text-shadow: 1px 1px 5px var(--highlight);
+}
+
+.banner .content p {
+    color: var(--accent-dark);
+}
+
+.banner .content .model {
+    width: 100%;
+    height: 75vh;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    background-size: auto 130%;
+    background-repeat: no-repeat;
+    background-position: top center;
+    z-index: 1;
+    filter: brightness(0.7);
+}
+
+@media screen and (max-width: 1023px) {
+    .banner .slider {
+        width: 160px;
+        height: 200px;
+        left: calc(50% - 80px);
+    }
+
+    .banner .slider .item {
+        transform: rotateY(calc((var(--position) - 1) * (360deg / var(--quantity)))) translateZ(300px);
+    }
+
+    .banner .content h1 {
+        text-align: center;
+        width: 100%;
+        text-shadow: 0 10px 20px #000;
+        font-size: 7em;
+    }
+
+    .banner .content .author {
+        padding: 20px;
+        text-shadow: 0 10px 20px #000;
+        z-index: 2;
+        max-width: unset;
+        width: 100%;
+        text-align: center;
+        padding: 0 30px;
+    }
+}
+
+@media screen and (max-width: 767px) {
+    .banner .slider {
+        width: 100px;
+        height: 150px;
+        left: calc(50% - 50px);
+    }
+
+    .banner .slider .item {
+        transform: rotateY(calc((var(--position) - 1) * (360deg / var(--quantity)))) translateZ(180px);
+    }
+
+    .banner .content h1 {
+        font-size: 5em;
+    }
+}
